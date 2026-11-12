@@ -1,0 +1,3 @@
+# Keep Cloudflare from injecting external analytics JavaScript into this site.
+/*
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
