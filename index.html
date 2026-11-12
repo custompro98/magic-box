@@ -170,7 +170,7 @@
             event.preventDefault(); 
 
             // 3. We get the magic word (the color) the user typed
-            const newColor = input.value.trim();
+            const newColor = input.value.trim().toLowerCase().replace(" ", "");
 
             if (newColor !== '') {
                 // 4. We tell the computer to change the background color of the box!
