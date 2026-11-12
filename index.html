@@ -64,7 +64,7 @@
                         autocomplete="off"
                         required
                     >
-                    <p id="color-options" class="text-lg text-gray-500">Try red, blue, or pink.</p>
+                    <p id="color-options" class="text-lg text-gray-500">Try red, blue, or rainbow.</p>
                 </div>
 
                 <!-- Big, playful submit button -->
@@ -155,7 +155,13 @@
 
             if (newColor !== '') {
                 // 4. We tell the computer to change the background color of the box!
-                magicBox.style.backgroundColor = newColor;
+                if (newColor.toLowerCase() === 'rainbow') {
+                    magicBox.style.backgroundImage = 'linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet 90%)';
+                } else {
+                    // Clear the rainbow when a solid color is chosen again.
+                    magicBox.style.backgroundImage = '';
+                    magicBox.style.backgroundColor = newColor;
+                }
                 
                 // Hide the question mark once a color is chosen
                 boxText.style.display = 'none';
