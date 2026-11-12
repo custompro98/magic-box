@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Magic Color Box</title>
+    <!-- Prebuilt Tailwind CSS is included locally so this page works offline. -->
+    <link rel="stylesheet" href="./vendor/tailwind.min.css">
+    <style>
+        /* Using a fun, kid-friendly font stack */
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+            background-color: #f0fdf4;
+            background-image: radial-gradient(#bbf7d0 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+        
+        /* Adding a smooth transition for the magic box color change */
+        #magic-box {
+            transition: background-color 0.5s ease, transform 0.2s ease;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Main Container -->
+    <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-2xl max-w-lg w-full border-8 border-yellow-300 text-center">
+        
+        <h1 class="text-4xl sm:text-5xl font-black text-purple-600 mb-2 drop-shadow-md">
+            The Magic Box!
+        </h1>
+        <p class="text-xl text-gray-500 mb-8 font-bold">Tell the computer what to do!</p>
+
+        <!-- The Box that will change color -->
+        <div id="magic-box" class="w-48 h-48 sm:w-64 sm:h-64 mx-auto border-8 border-dashed border-gray-300 rounded-3xl mb-10 flex items-center justify-center bg-gray-100 shadow-inner">
+            <span id="box-text" class="text-6xl opacity-30 text-gray-500 font-black">?</span>
+        </div>
+
+        <!-- The Form -->
+        <form id="color-form" class="flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+                <label for="color-input" class="text-3xl font-bold text-blue-600">
+                    Type a color:
+                </label>
+                <!-- Large text input for easy reading -->
+                <input 
+                    type="text" 
+                    id="color-input" 
+                    class="text-4xl text-center p-4 rounded-2xl border-4 border-blue-300 focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-200" 
+                    placeholder="red, blue, pink..." 
+                    autocomplete="off"
+                    required
+                >
+            </div>
+            
+            <!-- Big, playful submit button -->
+            <button 
+                type="submit" 
+                class="bg-pink-500 hover:bg-pink-400 text-white text-3xl sm:text-4xl font-black py-5 px-8 rounded-2xl shadow-lg transform transition active:scale-95 active:translate-y-2 border-b-8 border-pink-700 hover:border-pink-600"
+            >
+                Change Color! ✨
+            </button>
+        </form>
+
+    </div>
+
+    <!-- The JavaScript Code that does the "Magic" -->
+    <script>
+        // 1. We tell the computer to find our important pieces on the page
+        const form = document.getElementById('color-form');
+        const input = document.getElementById('color-input');
+        const magicBox = document.getElementById('magic-box');
+        const boxText = document.getElementById('box-text');
+
+        // 2. We listen for when the user clicks the "Change Color!" button
+        form.addEventListener('submit', function(event) {
+            // Stop the page from reloading (which is what forms normally do)
+            event.preventDefault(); 
+
+            // 3. We get the magic word (the color) the user typed
+            const newColor = input.value.trim();
+
+            if (newColor !== '') {
+                // 4. We tell the computer to change the background color of the box!
+                magicBox.style.backgroundColor = newColor;
+                
+                // Hide the question mark once a color is chosen
+                boxText.style.display = 'none';
+
+                // Give the box a fun little bounce effect
+                magicBox.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    magicBox.style.transform = 'scale(1)';
+                }, 200);
+            }
+
+            // 5. Clear the input so it's ready for the next color!
+            input.value = '';
+            // Put the blinking cursor back in the box
+            input.focus(); 
+        });
+    </script>
+</body>
+</html>
